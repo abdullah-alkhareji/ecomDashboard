@@ -12,5 +12,10 @@
       Add Product
     </button>
   </div>
-  <app-data-table [data]="products" [columns]="columns"></app-data-table>
+  <app-data-table
+    [data]="products | async"
+    [columns]="columns"
+
+    [onDelete]="deleteProduct"
+  ></app-data-table>
 </div>

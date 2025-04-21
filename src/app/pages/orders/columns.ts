@@ -23,7 +23,13 @@ export const createColumns = (
     accessorKey: 'products',
     header: 'Products',
     cell: (row: Order) => {
-      return row.products.map((p) => `${p.name} (${p.quantity}x)`).join(', ');
+      return row.products
+        .map((p) => {
+          const name =
+            p.name.length > 20 ? p.name.substring(0, 20) + '...' : p.name;
+          return `${name} (${p.quantity}x)`;
+        })
+        .join(', ');
     },
   },
   {
@@ -46,6 +52,13 @@ export const createColumns = (
     cell: (row: Order) => {
       const status = row.status.charAt(0).toUpperCase() + row.status.slice(1);
       return status;
+    },
+  },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: () => {
+      return '';
     },
   },
 ];

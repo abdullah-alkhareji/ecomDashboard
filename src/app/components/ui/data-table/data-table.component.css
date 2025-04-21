@@ -1,5 +1,5 @@
 .data-table-container {
-  @apply w-full p-2 rounded-lg border border-gray-900 bg-gray-800 text-white shadow-sm;
+  @apply w-full p-2 rounded-lg border border-gray-900 bg-gray-800 text-white shadow-sm max-w-full mx-auto;
 }
 
 table {

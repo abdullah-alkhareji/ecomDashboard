@@ -26,7 +26,6 @@ export class UsersService {
   }
 
   deleteUser(id: number) {
-    console.log(id);
     this._users.update((users) => users.filter((user) => user.id !== id));
   }
 

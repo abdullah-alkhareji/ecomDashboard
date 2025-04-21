@@ -15,14 +15,15 @@ export const createColumns = (
     header: 'Name',
     cell: (row: Product) => {
       const { name } = row;
-      return name;
+      return name.length > 20 ? name.substring(0, 20) + '...' : name;
     },
   },
   {
     accessorKey: 'description',
     header: 'Description',
     cell: (row: Product) => {
-      return row.description;
+      const desc = row.description;
+      return desc.length > 20 ? desc.substring(0, 20) + '...' : desc;
     },
   },
   {
@@ -68,13 +69,13 @@ export const createColumns = (
       return row.rating;
     },
   },
-  {
-    accessorKey: 'imageUrl',
-    header: 'Image',
-    cell: (row: Product) => {
-      return row.imageUrl;
-    },
-  },
+  // {
+  //   accessorKey: 'imageUrl',
+  //   header: 'Image',
+  //   cell: (row: Product) => {
+  //     return row.imageUrl;
+  //   },
+  // },
   {
     accessorKey: 'createdAt',
     header: 'Created At',
@@ -99,5 +100,10 @@ export const createColumns = (
     cell: (row: Product) => {
       return row.tags.join(', ');
     },
+  },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: () => '',
   },
 ];

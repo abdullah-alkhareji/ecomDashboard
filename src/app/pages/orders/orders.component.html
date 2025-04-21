@@ -12,5 +12,5 @@
       Add Order
     </button>
   </div>
-  <app-data-table [data]="orders" [columns]="columns"></app-data-table>
+  <app-data-table [data]="orders | async" [columns]="columns" [onDelete]="deleteOrder"></app-data-table>
 </div>
