@@ -36,7 +36,7 @@ export class HomeCardsComponent {
     const totalProducts = this.productsService.products$.pipe(
       map((products) => products.length)
     );
-    console.log({ totalProducts });
+    ({ totalProducts });
     return totalProducts;
   }
 
@@ -44,7 +44,7 @@ export class HomeCardsComponent {
     const totalOrders = this.ordersService.orders$.pipe(
       map((orders) => orders.length)
     );
-    console.log({ totalOrders });
+    ({ totalOrders });
     return totalOrders;
   }
 
@@ -52,7 +52,7 @@ export class HomeCardsComponent {
     const totalSales = this.ordersService.orders$.pipe(
       map((orders) => orders.reduce((acc, order) => acc + order.totalPrice, 0))
     );
-    console.log({ totalSales });
+    ({ totalSales });
     return totalSales;
   }
 }

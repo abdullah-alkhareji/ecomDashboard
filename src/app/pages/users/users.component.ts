@@ -22,7 +22,7 @@ export class UsersComponent {
   }
 
   editUser(user: User) {
-    console.log(user);
+    user;
   }
 
   deleteUser(user: User) {
