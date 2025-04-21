@@ -1,20 +1,27 @@
 import { Component } from '@angular/core';
 import { HomeCardComponent } from '../home-card/home-card.component';
-import { USERS } from '../../../data/users';
-import { PRODUCTS } from '../../../data/products';
-import { ORDERS } from '../../../data/orders';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, AsyncPipe } from '@angular/common';
+import { UsersService } from '../../services/users.service';
+import { ProductsService } from '../../services/products.service';
+import { OrdersService } from '../../services/orders.service';
+import { map } from 'rxjs';
+
 @Component({
   selector: 'app-home-cards',
   standalone: true,
-  imports: [HomeCardComponent, CurrencyPipe],
+  imports: [HomeCardComponent, CurrencyPipe, AsyncPipe],
   templateUrl: './home-cards.component.html',
   styleUrl: './home-cards.component.css',
 })
 export class HomeCardsComponent {
-  users = USERS;
-  products = PRODUCTS;
-  orders = ORDERS;
+  constructor(
+    private usersService: UsersService,
+    private productsService: ProductsService,
+    private ordersService: OrdersService
+  ) {}
+  users = this.usersService.users$;
+  products = this.productsService.products$;
+  orders = this.ordersService.orders$;
 
   totalCustomers = this.getTotalCustomers();
   totalProducts = this.getTotalProducts();
@@ -22,18 +29,30 @@ export class HomeCardsComponent {
   totalSales = this.getTotalSales();
 
   getTotalCustomers() {
-    return this.users.length;
+    return this.usersService.users$.pipe(map((users) => users.length));
   }
 
   getTotalProducts() {
-    return this.products.length;
+    const totalProducts = this.productsService.products$.pipe(
+      map((products) => products.length)
+    );
+    console.log({ totalProducts });
+    return totalProducts;
   }
 
   getTotalOrders() {
-    return this.orders.length;
+    const totalOrders = this.ordersService.orders$.pipe(
+      map((orders) => orders.length)
+    );
+    console.log({ totalOrders });
+    return totalOrders;
   }
 
   getTotalSales() {
-    return this.orders.reduce((acc, order) => acc + order.totalPrice, 0);
+    const totalSales = this.ordersService.orders$.pipe(
+      map((orders) => orders.reduce((acc, order) => acc + order.totalPrice, 0))
+    );
+    console.log({ totalSales });
+    return totalSales;
   }
 }

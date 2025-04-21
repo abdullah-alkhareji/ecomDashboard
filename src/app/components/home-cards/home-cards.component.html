@@ -1,12 +1,12 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
   <app-home-card
     title="Total Customers"
-    [value]="totalCustomers"
+    [value]="totalCustomers | async"
   ></app-home-card>
-  <app-home-card title="Total Products" [value]="totalProducts"></app-home-card>
-  <app-home-card title="Total Orders" [value]="totalOrders"></app-home-card>
+  <app-home-card title="Total Products" [value]="totalProducts | async"></app-home-card>
+  <app-home-card title="Total Orders" [value]="totalOrders | async"></app-home-card>
   <app-home-card
     title="Total Sales"
-    [value]="totalSales | currency : 'KWD'"
+    [value]="totalSales | async | currency : 'KWD'"
   ></app-home-card>
 </div>

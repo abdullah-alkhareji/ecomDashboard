@@ -2,7 +2,6 @@ import { Component, ViewChild, TemplateRef } from '@angular/core';
 import { HomeCardsComponent } from '../../components/home-cards/home-cards.component';
 import { DataTableComponent } from '../../components/ui/data-table/data-table.component';
 import { OrdersService } from '../../services/orders.service';
-import { createColumns } from './columns';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +16,5 @@ export class HomeComponent {
 
   constructor(private ordersService: OrdersService) {}
 
-  columns = createColumns(this.ordersService);
-  orders = this.ordersService.getOrders();
+  orders = this.ordersService.orders$;
 }

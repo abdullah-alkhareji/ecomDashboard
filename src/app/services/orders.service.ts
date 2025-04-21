@@ -4,13 +4,14 @@ import { UsersService } from './users.service';
 import { User, USERS } from '../../data/users';
 import { ProductsService } from './products.service';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrdersService {
-  private _orders = signal<Order[]>(ORDERS);
-  orders$ = toObservable(this._orders);
+  private _orders = new BehaviorSubject<Order[]>(ORDERS);
+  orders$ = this._orders.asObservable();
 
   constructor(
     private usersService: UsersService,
@@ -18,11 +19,11 @@ export class OrdersService {
   ) {}
 
   getOrders() {
-    return this._orders();
+    return this._orders.value;
   }
 
   getOrder(id: number) {
-    return this._orders().find((order) => order.id === id);
+    return this._orders.value.find((order) => order.id === id);
   }
 
   getOrderUser(id: number) {
@@ -31,43 +32,31 @@ export class OrdersService {
   }
 
   getOrderProducts(id: number) {
-    return this._orders().find((order) => order.id === id)?.products;
+    return this._orders.value.find((order) => order.id === id)?.products;
   }
 
   getOrderTotalPrice(id: number) {
-    return this._orders().find((order) => order.id === id)?.totalPrice;
+    return this._orders.value.find((order) => order.id === id)?.totalPrice;
   }
 
   createOrder(order: Order) {
-    this._orders().push(order);
+    this._orders.next([...this._orders.value, order]);
   }
 
   updateOrder(id: number, order: Order) {
-    this._orders.update((orders) =>
-      orders.map((o) => (o.id === id ? order : o))
-    );
+    this._orders.next(this._orders.value.map((o) => (o.id === id ? order : o)));
   }
 
   deleteOrder(id: number) {
-    this._orders.update((orders) => orders.filter((order) => order.id !== id));
+    this._orders.next(this._orders.value.filter((order) => order.id !== id));
   }
 
   getOrderStatus(id: number) {
-    return this._orders().find((order) => order.id === id)?.status;
-  }
-
-  getOrderProduct(id: number) {
-    return this.productsService.getProduct(id);
-  }
-
-  getOrderUserName(id: number) {
-    return this.usersService.getUser(
-      this._orders().find((order) => order.id === id)?.userId ?? -1
-    )?.name;
+    return this._orders.value.find((order) => order.id === id)?.status;
   }
 
   getOrderQuantity(id: number) {
-    return this._orders()
+    return this._orders.value
       .find((order) => order.id === id)
       ?.products.reduce((acc, product) => acc + product.quantity, 0);
   }
