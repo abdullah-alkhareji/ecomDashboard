@@ -1,0 +1,24 @@
+<div class="flex flex-col h-full w-64 bg-gray-800">
+  <div class="flex flex-col gap-5 p-5">
+    <app-sidebar-link
+      text="Dashboard"
+      [icon]="faDashboard"
+      routerLink="/"
+    ></app-sidebar-link>
+    <app-sidebar-link
+      text="Products"
+      [icon]="faBox"
+      routerLink="/products"
+    ></app-sidebar-link>
+    <app-sidebar-link
+      text="Orders"
+      [icon]="faCartShopping"
+      routerLink="/orders"
+    ></app-sidebar-link>
+    <app-sidebar-link
+      text="Users"
+      [icon]="faUsers"
+      routerLink="/users"
+    ></app-sidebar-link>
+  </div>
+</div>

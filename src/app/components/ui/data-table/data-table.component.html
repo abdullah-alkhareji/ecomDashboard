@@ -1,0 +1,133 @@
+<div class="data-table-container" [class]="className">
+  <div class="overflow-x-auto">
+    <table class="w-full">
+      <thead>
+        <tr>
+          <th *ngIf="selectable" class="w-12">
+            <input type="checkbox" class="form-checkbox" />
+          </th>
+          <th
+            *ngFor="let column of columns"
+            (click)="onSort(column)"
+            [class.cursor-pointer]="showSorting"
+            class="px-4 py-2 text-left"
+          >
+            <div class="flex items-center gap-2">
+              {{ column.header }}
+              <ng-container *ngIf="showSorting">
+                <span
+                  *ngIf="sorting.key === column.accessorKey"
+                  class="sort-icon"
+                >
+                  {{ sorting.direction === "asc" ? "↑" : "↓" }}
+                </span>
+              </ng-container>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let row of sortedData; let i = index"
+          (click)="onRowClickHandler(row)"
+          [class.cursor-pointer]="rowClick.observed"
+          [class.selected]="isRowSelected(i)"
+          class="hover:bg-gray-50"
+        >
+          <td *ngIf="selectable" class="px-4 py-2">
+            <input
+              type="checkbox"
+              [checked]="isRowSelected(i)"
+              (change)="toggleRowSelection(i)"
+              class="form-checkbox"
+            />
+          </td>
+          <td *ngFor="let column of columns" class="px-4 py-2">
+            <ng-container [ngSwitch]="column.accessorKey">
+              <!-- Status Column -->
+              <span
+                *ngSwitchCase="'status'"
+                [ngClass]="{
+                'px-2 py-1 rounded-full text-xs font-medium': true,
+                'bg-green-100 text-green-800': column.cell?.(row) === 'Delivered',
+                'bg-blue-100 text-blue-800': column.cell?.(row) === 'Processing',
+                'bg-purple-100 text-purple-800': column.cell?.(row) === 'Shipped',
+                'bg-red-100 text-red-800': column.cell?.(row) === 'Cancelled',
+                'bg-yellow-100 text-yellow-800': column.cell?.(row) === 'Pending'
+              }"
+              >
+                {{ column.cell?.(row) }}
+              </span>
+              <!-- Default Column -->
+              <ng-container *ngSwitchDefault>
+                <ng-container *ngIf="column.cell; else defaultCell">
+                  <ng-container
+                    *ngIf="column.id === 'actions'; else regularCell"
+                  >
+                    <div class="flex gap-2">
+                      <button
+                        class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                        (click)="onEdit?.(row)"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                        (click)="onDelete && onDelete(row)"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </ng-container>
+                  <ng-template #regularCell>
+                    {{ column.cell(row) }}
+                  </ng-template>
+                </ng-container>
+                <ng-template #defaultCell>
+                  {{ column.accessorKey ? row[column.accessorKey] : "" }}
+                </ng-template>
+              </ng-container>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="showPagination" class="pagination-container mt-4">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <button
+          (click)="onPageChange(currentPage - 1)"
+          [disabled]="currentPage === 0"
+          class="pagination-button"
+        >
+          Previous
+        </button>
+        <span class="mx-2">
+          Page {{ currentPage + 1 }} of {{ totalPages }}
+        </span>
+        <button
+          (click)="onPageChange(currentPage + 1)"
+          [disabled]="currentPage === totalPages - 1"
+          class="pagination-button"
+        >
+          Next
+        </button>
+      </div>
+      <div class="flex items-center gap-2">
+        <span>Rows per page:</span>
+        <select
+          [(ngModel)]="pageSize"
+          (change)="onPageChange(0)"
+          class="form-select"
+        >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>

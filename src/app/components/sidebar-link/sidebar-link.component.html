@@ -1,0 +1,11 @@
+<a
+  [routerLink]="routerLink"
+  routerLinkActive="text-amber-500"
+  [routerLinkActiveOptions]="{ exact: true }"
+  class="active:text-amber-500 active:bg-gray-500/30 hover:bg-gray-500/30 rounded-md p-2 flex gap-5 items-center text-lg"
+>
+  @if (icon) {
+  <fa-icon [icon]="icon"></fa-icon>
+  }
+  <span>{{ text }}</span>
+</a>
