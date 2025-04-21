@@ -12,10 +12,11 @@
       Add User
     </button>
   </div>
-  <app-data-table
+  <!-- <app-data-table
     [data]="users | async"
     [columns]="columns"
     [onEdit]="editUser"
     [onDelete]="deleteUser"
-  ></app-data-table>
+  ></app-data-table> -->
+  <app-users-table [users]="users | async"></app-users-table>
 </div>

@@ -1,0 +1,35 @@
+<button
+  (click)="openModal()"
+  [ngClass]="{
+    'bg-blue-700': bgColor === 'blue',
+    'bg-red-700': bgColor === 'red',
+    'bg-gray-700': bgColor === 'gray',
+    'hover:bg-blue-600': bgColor === 'blue',
+    'hover:bg-red-600': bgColor === 'red',
+    'hover:bg-gray-600': bgColor === 'gray'
+  }"
+  class="text-white px-4 py-2 rounded-md border border-gray-600"
+>
+  {{ buttonText }}
+</button>
+
+@if (isOpen) {
+<div
+  class="flex w-screen h-screen bg-black/70 backdrop-blur shadow-lg absolute top-0 left-0 right-0 bottom-0 justify-center items-center"
+>
+  <div
+    class="w-1/2 h-max max-h-screen overflow-y-auto bg-gray-900 border-2 border-gray-800 rounded-lg p-4"
+  >
+    <div class="flex justify-between items-center">
+      <h1 class="text-2xl font-bold">{{ title }}</h1>
+      <button
+        (click)="closeModal()"
+        class="size-8 bg-gray-800 text-gray-400 rounded-full border-2 border-gray-700 hover:bg-gray-700 hover:text-gray-100 transition-colors cursor-pointer"
+      >
+        X
+      </button>
+    </div>
+    <ng-content></ng-content>
+  </div>
+</div>
+}

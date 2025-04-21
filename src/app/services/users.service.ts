@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User, USERS } from '../../data/users';
+import { User, UserForm, USERS } from '../../data/users';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -21,8 +21,10 @@ export class UsersService {
     this._users.next([...this._users.value, user]);
   }
 
-  updateUser(id: number, user: User) {
-    this._users.next(this._users.value.map((u) => (u.id === id ? user : u)));
+  updateUser(id: number, user: UserForm) {
+    this._users.next(
+      this._users.value.map((u) => (u.id === id ? { ...u, ...user } : u))
+    );
   }
 
   deleteUser(id: number) {

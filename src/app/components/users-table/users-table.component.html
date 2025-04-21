@@ -1,0 +1,76 @@
+<div class="data-table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Created At</th>
+        <th>Last Login</th>
+        <th>Email Verified</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of users; track user.id) {
+      <tr>
+        <td>{{ user.id }}</td>
+        <td class="flex items-center gap-2">
+          <img
+            [src]="user.avatarUrl"
+            [alt]="user.name"
+            class="w-10 h-10 rounded-full"
+          />
+          {{ user.name }}
+        </td>
+        <td>
+          {{ user.email }}
+        </td>
+        <td>
+          {{ user.role }}
+        </td>
+        <td>
+          {{ user.status }}
+        </td>
+        <td>
+          {{ user.createdAt | date }}
+        </td>
+        <td>{{ user.lastLogin | date }}</td>
+        <td>{{ user.isEmailVerified }}</td>
+        <td class="flex gap-2">
+          <app-modal
+            [title]="'Edit User'"
+            [buttonText]="'Edit'"
+            [bgColor]="'blue'"
+            [isOpen]="isEditModalOpen"
+            (close)="onCloseModal()"
+            (open)="openEditModal(user)"
+          >
+            <app-edit-user-form
+              [user]="selectedUser"
+              (save)="onEditUser($event)"
+            ></app-edit-user-form>
+          </app-modal>
+          <app-modal
+            [title]="'Delete User'"
+            [buttonText]="'Delete'"
+            [bgColor]="'red'"
+          >
+            <div class="flex flex-col gap-4 py-4">
+              <p>Are you sure you want to delete {{ user.name }}?</p>
+              <button
+                (click)="onDeleteUser(user)"
+                class="bg-red-700 text-white px-4 py-2 rounded-md border border-gray-600 hover:bg-gray-600"
+              >
+                Delete
+              </button>
+            </div>
+          </app-modal>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

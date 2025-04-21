@@ -10,6 +10,14 @@ export interface User {
   avatarUrl: string;
 }
 
+export interface UserForm {
+  name: string;
+  email: string;
+  role: string;
+  status: string;
+  avatarUrl: string;
+}
+
 export const USERS: User[] = [
   {
     id: 1,
