@@ -1,12 +1,11 @@
 import { Component, ViewChild, TemplateRef } from '@angular/core';
 import { HomeCardsComponent } from '../../components/home-cards/home-cards.component';
 import { OrdersService } from '../../services/orders.service';
-import { ModalComponent } from '../../components/ui/modal/modal.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HomeCardsComponent, ModalComponent],
+  imports: [HomeCardsComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
