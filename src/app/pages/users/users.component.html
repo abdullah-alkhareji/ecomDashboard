@@ -6,17 +6,15 @@
         Manage your users here. Add, edit, or delete users as needed.
       </p>
     </div>
-    <button
-      class="bg-gray-800 text-white px-4 py-2 rounded-md border border-gray-600 hover:bg-gray-600"
+    <app-modal
+      [buttonText]="'Add User'"
+      [bgColor]="'gray2'"
+      [isOpen]="isModalOpen"
+      (close)="onCloseModal()"
+      (open)="onOpenModal()"
     >
-      Add User
-    </button>
+      <app-add-user-form (save)="addUser($event)"></app-add-user-form>
+    </app-modal>
   </div>
-  <!-- <app-data-table
-    [data]="users | async"
-    [columns]="columns"
-    [onEdit]="editUser"
-    [onDelete]="deleteUser"
-  ></app-data-table> -->
   <app-users-table [users]="users | async"></app-users-table>
 </div>

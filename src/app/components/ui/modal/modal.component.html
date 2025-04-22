@@ -1,12 +1,13 @@
 <button
   (click)="openModal()"
   [ngClass]="{
+    'bg-gray-800': bgColor === 'gray2',
     'bg-blue-700': bgColor === 'blue',
     'bg-red-700': bgColor === 'red',
     'bg-gray-700': bgColor === 'gray',
     'hover:bg-blue-600': bgColor === 'blue',
     'hover:bg-red-600': bgColor === 'red',
-    'hover:bg-gray-600': bgColor === 'gray'
+    'hover:bg-gray-600': bgColor === 'gray' || bgColor === 'gray2',
   }"
   class="text-white px-4 py-2 rounded-md border border-gray-600"
 >

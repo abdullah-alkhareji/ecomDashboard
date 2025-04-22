@@ -17,8 +17,16 @@ export class UsersService {
     return this._users.value.find((user) => user.id === id);
   }
 
-  createUser(user: User) {
-    this._users.next([...this._users.value, user]);
+  addUser(user: UserForm) {
+    const newUser = {
+      ...user,
+      id: this._users.value.length + 1,
+      createdAt: new Date().toISOString(),
+      lastLogin: null,
+      isEmailVerified: false,
+    };
+
+    this._users.next([...this._users.value, newUser]);
   }
 
   updateUser(id: number, user: UserForm) {
