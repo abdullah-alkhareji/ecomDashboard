@@ -9,7 +9,7 @@ import { ProductsTableComponent } from "../../components/products-table/products
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [DataTableComponent, AsyncPipe, ProductsTableComponent],
+  imports: [AsyncPipe, ProductsTableComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
