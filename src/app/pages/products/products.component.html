@@ -12,10 +12,11 @@
       Add Product
     </button>
   </div>
-  <app-data-table
+  <app-products-table [products]="products | async"></app-products-table>
+  <!-- <app-data-table
     [data]="products | async"
     [columns]="columns"
 
     [onDelete]="deleteProduct"
-  ></app-data-table>
+  ></app-data-table> -->
 </div>

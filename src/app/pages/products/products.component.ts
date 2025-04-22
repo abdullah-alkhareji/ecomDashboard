@@ -4,11 +4,12 @@ import { createColumns } from './columns';
 import { ProductsService } from '../../services/products.service';
 import { AsyncPipe } from '@angular/common';
 import { Product } from '../../../data/products';
+import { ProductsTableComponent } from "../../components/products-table/products-table.component";
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [DataTableComponent, AsyncPipe],
+  imports: [DataTableComponent, AsyncPipe, ProductsTableComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })

@@ -4,64 +4,69 @@
       <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Email</th>
-        <th>Role</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Stock</th>
         <th>Status</th>
+        <th>Rating</th>
         <th>Created At</th>
-        <th>Last Login</th>
-        <th>Email Verified</th>
+        <th>Updated At</th>
+        <!-- <th>Tags</th> -->
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      @for (user of paginatedUsers; track user.id) {
+      @for (product of paginatedProducts; track product.id) {
       <tr>
-        <td>{{ user.id }}</td>
+        <td>{{ product.id }}</td>
         <td class="flex items-center gap-2">
           <img
-            [src]="user.avatarUrl"
-            [alt]="user.name"
+            [src]="product.imageUrl"
+            [alt]="product.name"
             class="w-10 h-10 rounded-full"
           />
-          {{ user.name }}
+          {{ product.name }}
         </td>
         <td>
-          {{ user.email }}
+          {{ product.description }}
         </td>
         <td>
-          {{ user.role }}
+          {{ product.price }}
         </td>
         <td>
-          {{ user.status }}
+          {{ product.category }}
         </td>
         <td>
-          {{ user.createdAt | date }}
+          {{ product.stock }}
         </td>
-        <td>{{ user.lastLogin | date }}</td>
-        <td>{{ user.isEmailVerified }}</td>
+        <td>{{ product.status }}</td>
+        <td>{{ product.rating }}</td>
+        <td>{{ product.createdAt | date : "dd/MM/yyyy" }}</td>
+        <td>{{ product.updatedAt | date : "dd/MM/yyyy" }}</td>
         <td class="flex gap-2">
           <app-modal
-            [title]="'Edit User'"
+            [title]="'Edit Product'"
             [buttonText]="'Edit'"
             [bgColor]="'blue'"
             [isOpen]="isEditModalOpen"
             (close)="onCloseModal()"
-            (open)="openEditModal(user)"
+            (open)="openEditModal(product)"
           >
-            <app-edit-user-form
-              [user]="selectedUser"
-              (save)="onEditUser($event)"
-            ></app-edit-user-form>
+            <!-- <app-edit-user-form
+                [user]="selectedUser"
+                (save)="onEditUser($event)"
+              ></app-edit-user-form> -->
           </app-modal>
           <app-modal
-            [title]="'Delete User'"
+            [title]="'Delete Product'"
             [buttonText]="'Delete'"
             [bgColor]="'red'"
           >
             <div class="flex flex-col gap-4 py-4">
-              <p>Are you sure you want to delete {{ user.name }}?</p>
+              <p>Are you sure you want to delete {{ product.name }}?</p>
               <button
-                (click)="onDeleteUser(user)"
+                (click)="onDeleteProduct(product)"
                 class="bg-red-700 text-white px-4 py-2 rounded-md border border-gray-600 hover:bg-gray-600"
               >
                 Delete
