@@ -6,15 +6,6 @@
         Manage your orders here. Add, edit, or delete orders as needed.
       </p>
     </div>
-    <button
-      class="bg-gray-800 text-white px-4 py-2 rounded-md border border-gray-600 hover:bg-gray-600"
-    >
-      Add Order
-    </button>
   </div>
-  <app-data-table
-    [data]="orders | async"
-    [columns]="columns"
-    [onDelete]="deleteOrder"
-  ></app-data-table>
+  <app-orders-table [orders]="orders | async"></app-orders-table>
 </div>

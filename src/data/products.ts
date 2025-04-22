@@ -13,6 +13,18 @@ export interface Product {
   tags: string[];
 }
 
+// For creating/editing products without the id and timestamps
+export interface ProductForm {
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  stock: number;
+  status: string;
+  rating: number;
+  imageUrl: string;
+}
+
 export const PRODUCTS: Product[] = [
   {
     id: 1,

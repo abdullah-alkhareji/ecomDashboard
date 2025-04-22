@@ -1,13 +1,20 @@
 import { Component, Input } from '@angular/core';
 import { ModalComponent } from '../ui/modal/modal.component';
-import { Product } from '../../../data/products';
+import { Product, ProductForm } from '../../../data/products';
 import { ProductsService } from '../../services/products.service';
-import { DatePipe } from '@angular/common';
+import { DatePipe, CurrencyPipe, SlicePipe } from '@angular/common';
+import { EditProductFormComponent } from '../edit-product-form/edit-product-form.component';
 
 @Component({
   selector: 'app-products-table',
   standalone: true,
-  imports: [ModalComponent, DatePipe],
+  imports: [
+    ModalComponent,
+    DatePipe,
+    EditProductFormComponent,
+    CurrencyPipe,
+    SlicePipe,
+  ],
   templateUrl: './products-table.component.html',
   styleUrl: './products-table.component.css',
 })
@@ -37,6 +44,11 @@ export class ProductsTableComponent {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
     }
+  }
+
+  onEditProduct(event: { id: number; product: ProductForm }) {
+    this.productsService.updateProduct(event.id, event.product);
+    this.isEditModalOpen = false;
   }
 
   onDeleteProduct(product: Product) {

@@ -6,11 +6,15 @@
         Manage your products here. Add, edit, or delete products as needed.
       </p>
     </div>
-    <button
-      class="bg-gray-800 text-white px-4 py-2 rounded-md border border-gray-600 hover:bg-gray-600"
+    <app-modal
+      [buttonText]="'Add Product'"
+      [bgColor]="'gray2'"
+      [isOpen]="isModalOpen"
+      (close)="onCloseModal()"
+      (open)="onOpenModal()"
     >
-      Add Product
-    </button>
+      <app-add-product-form (save)="addProduct($event)"></app-add-product-form>
+    </app-modal>
   </div>
   <app-products-table [products]="products | async"></app-products-table>
 </div>

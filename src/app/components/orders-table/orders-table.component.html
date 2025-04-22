@@ -3,73 +3,50 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Category</th>
-        <th>Stock</th>
+        <th>User</th>
+        <th>Total Price</th>
         <th>Status</th>
-        <th>Rating</th>
-        <th>Created At</th>
-        <th>Updated At</th>
-        <!-- <th>Tags</th> -->
+        <th>Order Date</th>
+        <th>Shipping Address</th>
+        <th>Payment Method</th>
+        <th>Tracking Number</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      @for (product of paginatedProducts; track product.id) {
+      @for (order of paginatedOrders; track order.id) {
       <tr>
-        <td>{{ product.id }}</td>
-        <td class="flex items-center gap-2">
-          <img
-            [src]="product.imageUrl"
-            [alt]="product.name"
-            class="w-10 h-10 rounded-full"
-          />
-          {{ product.name }}
-        </td>
-        <td>
-          {{
-            (product.description | slice : 0 : 30) +
-              (product.description.length > 30 ? "..." : "")
-          }}
-        </td>
-        <td>
-          {{ product.price | currency : "KWD" }}
-        </td>
-        <td>
-          {{ product.category }}
-        </td>
-        <td>
-          {{ product.stock }}
-        </td>
-        <td>{{ product.status }}</td>
-        <td>{{ product.rating }}</td>
-        <td>{{ product.createdAt | date : "dd/MM/yyyy" }}</td>
-        <td>{{ product.updatedAt | date : "dd/MM/yyyy" }}</td>
+        <td>{{ order.id }}</td>
+        <td>{{ order.userId }}</td>
+        <td>{{ order.totalPrice | currency : "KWD" }}</td>
+        <td>{{ order.status }}</td>
+        <td>{{ order.orderDate | date : "dd/MM/yyyy" }}</td>
+        <td>{{ order.shippingAddress }}</td>
+        <td>{{ order.paymentMethod }}</td>
+        <td>{{ order.trackingNumber || "N/A" }}</td>
         <td class="flex gap-2">
           <app-modal
-            [title]="'Edit Product'"
+            [title]="'Edit Order'"
             [buttonText]="'Edit'"
             [bgColor]="'blue'"
             [isOpen]="isEditModalOpen"
             (close)="onCloseModal()"
-            (open)="openEditModal(product)"
+            (open)="openEditModal(order)"
           >
-            <app-edit-product-form
-              [product]="selectedProduct"
-              (save)="onEditProduct($event)"
-            ></app-edit-product-form>
+            <app-edit-order-form
+              [order]="selectedOrder"
+              (save)="onEditOrder($event)"
+            ></app-edit-order-form>
           </app-modal>
           <app-modal
-            [title]="'Delete Product'"
+            [title]="'Delete Order'"
             [buttonText]="'Delete'"
             [bgColor]="'red'"
           >
             <div class="flex flex-col gap-4 py-4">
-              <p>Are you sure you want to delete {{ product.name }}?</p>
+              <p>Are you sure you want to delete order #{{ order.id }}?</p>
               <button
-                (click)="onDeleteProduct(product)"
+                (click)="onDeleteOrder(order)"
                 class="bg-red-700 text-white px-4 py-2 rounded-md border border-gray-600 hover:bg-gray-600"
               >
                 Delete

@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { Product, PRODUCTS } from '../../data/products';
+import { Product, PRODUCTS, ProductForm } from '../../data/products';
 import { UsersService } from './users.service';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, map } from 'rxjs';
@@ -26,7 +26,8 @@ export class ProductsService {
   }
 
   getProductDescription(id: number) {
-    return this._products.value.find((product) => product.id === id)?.description;
+    return this._products.value.find((product) => product.id === id)
+      ?.description;
   }
 
   getProductPrice(id: number) {
@@ -69,8 +70,21 @@ export class ProductsService {
     this._products.next([...this._products.value, product]);
   }
 
-  updateProduct(id: number, product: Product) {
-    this._products.next(this._products.value.map((p) => (p.id === id ? product : p)));
+  addProduct(productForm: ProductForm) {
+    const newProduct: Product = {
+      ...productForm,
+      id: Math.max(...this._products.value.map((p) => p.id)) + 1,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      tags: [],
+    };
+    this._products.next([...this._products.value, newProduct]);
+  }
+
+  updateProduct(id: number, product: ProductForm) {
+    this._products.next(
+      this._products.value.map((p) => (p.id === id ? { ...p, ...product } : p))
+    );
   }
 
   deleteProduct(id: number) {

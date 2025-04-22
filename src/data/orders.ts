@@ -25,7 +25,7 @@ export const ORDERS: Order[] = [
     status: 'delivered',
     orderDate: '2024-06-01T10:30:00Z',
     shippingAddress: '123 Main St, New York, NY 10001',
-    paymentMethod: 'credit_card',
+    paymentMethod: 'credit card',
     trackingNumber: 'TRK123456789',
   },
   {
@@ -53,7 +53,7 @@ export const ORDERS: Order[] = [
     status: 'processing',
     orderDate: '2024-06-10T09:15:00Z',
     shippingAddress: '789 Pine St, Chicago, IL 60601',
-    paymentMethod: 'credit_card',
+    paymentMethod: 'credit card',
     trackingNumber: 'TRK987654321',
   },
   {
@@ -68,7 +68,7 @@ export const ORDERS: Order[] = [
     status: 'shipped',
     orderDate: '2024-06-08T15:30:00Z',
     shippingAddress: '321 Maple St, Seattle, WA 98101',
-    paymentMethod: 'credit_card',
+    paymentMethod: 'credit card',
     trackingNumber: 'TRK456789123',
   },
   {
@@ -83,7 +83,7 @@ export const ORDERS: Order[] = [
     status: 'pending',
     orderDate: '2024-06-11T11:45:00Z',
     shippingAddress: '654 Cedar Ave, Boston, MA 02108',
-    paymentMethod: 'credit_card',
+    paymentMethod: 'credit card',
   },
   {
     id: 6,
@@ -110,7 +110,7 @@ export const ORDERS: Order[] = [
     status: 'delivered',
     orderDate: '2024-06-05T14:20:00Z',
     shippingAddress: '123 Main St, New York, NY 10001',
-    paymentMethod: 'credit_card',
+    paymentMethod: 'credit card',
     trackingNumber: 'TRK321654987',
   },
   {
@@ -123,7 +123,7 @@ export const ORDERS: Order[] = [
     status: 'delivered',
     orderDate: '2024-05-28T09:15:00Z',
     shippingAddress: '321 Maple St, Seattle, WA 98101',
-    paymentMethod: 'credit_card',
+    paymentMethod: 'credit card',
     trackingNumber: 'TRK147258369',
   },
   {
@@ -136,7 +136,7 @@ export const ORDERS: Order[] = [
     status: 'processing',
     orderDate: '2024-06-10T16:45:00Z',
     shippingAddress: '321 Maple St, Seattle, WA 98101',
-    paymentMethod: 'credit_card',
+    paymentMethod: 'credit card',
   },
   {
     id: 10,
@@ -148,7 +148,7 @@ export const ORDERS: Order[] = [
     status: 'shipped',
     orderDate: '2024-06-09T13:30:00Z',
     shippingAddress: '654 Cedar Ave, Boston, MA 02108',
-    paymentMethod: 'credit_card',
+    paymentMethod: 'credit card',
     trackingNumber: 'TRK963852741',
   },
   {
@@ -173,6 +173,6 @@ export const ORDERS: Order[] = [
     status: 'processing',
     orderDate: '2024-06-11T11:30:00Z',
     shippingAddress: '123 Main St, New York, NY 10001',
-    paymentMethod: 'credit_card',
+    paymentMethod: 'credit card',
   },
 ];

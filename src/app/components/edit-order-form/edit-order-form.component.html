@@ -1,0 +1,92 @@
+@if (order) {
+<form [formGroup]="form" (ngSubmit)="onSave()" class="flex flex-col gap-4">
+  <div class="flex flex-col gap-2">
+    <label for="userId">User ID</label>
+    <input
+      type="number"
+      id="userId"
+      [value]="order.userId"
+      formControlName="userId"
+      class="w-full bg-gray-800 text-white px-4 py-2 rounded-md border border-gray-600 hover:bg-gray-600"
+    />
+  </div>
+  <div class="flex flex-col gap-2">
+    <label for="totalPrice">Total Price</label>
+    <input
+      type="number"
+      id="totalPrice"
+      [value]="order.totalPrice"
+      formControlName="totalPrice"
+      min="0"
+      step="0.01"
+      class="w-full bg-gray-800 text-white px-4 py-2 rounded-md border border-gray-600 hover:bg-gray-600"
+    />
+  </div>
+  <div class="flex flex-col gap-2">
+    <label for="status">Status</label>
+    <select
+      id="status"
+      [value]="order.status"
+      formControlName="status"
+      class="w-full bg-gray-800 text-white px-4 py-2 rounded-md border border-gray-600 hover:bg-gray-600"
+    >
+      <option value="pending">Pending</option>
+      <option value="processing">Processing</option>
+      <option value="shipped">Shipped</option>
+      <option value="delivered">Delivered</option>
+      <option value="cancelled">Cancelled</option>
+    </select>
+  </div>
+  <div class="flex flex-col gap-2">
+    <label for="orderDate">Order Date</label>
+    <input
+      type="datetime-local"
+      id="orderDate"
+      [value]="order.orderDate"
+      formControlName="orderDate"
+      class="w-full bg-gray-800 text-white px-4 py-2 rounded-md border border-gray-600 hover:bg-gray-600"
+    />
+  </div>
+  <div class="flex flex-col gap-2">
+    <label for="shippingAddress">Shipping Address</label>
+    <textarea
+      id="shippingAddress"
+      [value]="order.shippingAddress"
+      formControlName="shippingAddress"
+      class="w-full bg-gray-800 text-white px-4 py-2 rounded-md border border-gray-600 hover:bg-gray-600"
+      rows="3"
+    ></textarea>
+  </div>
+  <div class="flex flex-col gap-2">
+    <label for="paymentMethod">Payment Method</label>
+    <select
+      id="paymentMethod"
+      [value]="order.paymentMethod"
+      formControlName="paymentMethod"
+      class="w-full bg-gray-800 text-white px-4 py-2 rounded-md border border-gray-600 hover:bg-gray-600"
+    >
+      <option value="credit_card">Credit Card</option>
+      <option value="paypal">PayPal</option>
+      <option value="bank_transfer">Bank Transfer</option>
+      <option value="cash_on_delivery">Cash on Delivery</option>
+    </select>
+  </div>
+  <div class="flex flex-col gap-2">
+    <label for="trackingNumber">Tracking Number</label>
+    <input
+      type="text"
+      id="trackingNumber"
+      [value]="order.trackingNumber"
+      formControlName="trackingNumber"
+      class="w-full bg-gray-800 text-white px-4 py-2 rounded-md border border-gray-600 hover:bg-gray-600"
+    />
+  </div>
+
+  <button
+    type="submit"
+    class="bg-blue-700 text-white px-4 py-2 rounded-md border border-gray-600 hover:bg-blue-600"
+  >
+    Save
+  </button>
+</form>
+}
