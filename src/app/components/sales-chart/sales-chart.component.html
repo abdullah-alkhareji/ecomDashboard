@@ -1,0 +1,151 @@
+<div class="p-6 bg-slate-800 rounded-lg shadow-lg w-full mx-auto">
+  <div class="flex justify-between items-center mb-5">
+    <div>
+      <h3 class="text-xl font-bold text-white">Monthly Sales</h3>
+      <p class="text-gray-400 text-sm mt-1">Revenue breakdown by month</p>
+    </div>
+
+    <div class="flex items-center space-x-3">
+      <!-- Year selector -->
+      <div
+        class="flex items-center space-x-2"
+        *ngIf="availableYears.length > 0"
+      >
+        <label for="yearSelect" class="text-sm font-medium text-gray-300"
+          >Year:</label
+        >
+        <select
+          id="yearSelect"
+          class="bg-slate-700 border border-slate-600 text-white py-2 px-3 rounded-md text-sm font-medium focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          [ngModel]="selectedYear"
+          (ngModelChange)="changeYear(+$event)"
+        >
+          @for (year of availableYears; track year) {
+          <option [value]="year">{{ year }}</option>
+          }
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Status filter buttons -->
+  <div class="flex flex-wrap gap-2 mb-5">
+    <button
+      [class]="
+        'px-3 py-1.5 text-xs font-medium rounded-full transition-colors ' +
+        (selectedStatus === 'all'
+          ? 'bg-sky-500 text-white'
+          : 'bg-slate-700 text-gray-300 hover:bg-slate-600')
+      "
+      (click)="changeStatus('all')"
+    >
+      All Orders
+    </button>
+    <button
+      [class]="
+        'px-3 py-1.5 text-xs font-medium rounded-full transition-colors ' +
+        (selectedStatus === 'pending'
+          ? 'bg-amber-400 text-white'
+          : 'bg-slate-700 text-gray-300 hover:bg-slate-600')
+      "
+      (click)="changeStatus('pending')"
+    >
+      Pending
+    </button>
+    <button
+      [class]="
+        'px-3 py-1.5 text-xs font-medium rounded-full transition-colors ' +
+        (selectedStatus === 'processing'
+          ? 'bg-sky-400 text-white'
+          : 'bg-slate-700 text-gray-300 hover:bg-slate-600')
+      "
+      (click)="changeStatus('processing')"
+    >
+      Processing
+    </button>
+    <button
+      [class]="
+        'px-3 py-1.5 text-xs font-medium rounded-full transition-colors ' +
+        (selectedStatus === 'shipped'
+          ? 'bg-indigo-400 text-white'
+          : 'bg-slate-700 text-gray-300 hover:bg-slate-600')
+      "
+      (click)="changeStatus('shipped')"
+    >
+      Shipped
+    </button>
+    <button
+      [class]="
+        'px-3 py-1.5 text-xs font-medium rounded-full transition-colors ' +
+        (selectedStatus === 'delivered'
+          ? 'bg-emerald-400 text-white'
+          : 'bg-slate-700 text-gray-300 hover:bg-slate-600')
+      "
+      (click)="changeStatus('delivered')"
+    >
+      Delivered
+    </button>
+    <button
+      [class]="
+        'px-3 py-1.5 text-xs font-medium rounded-full transition-colors ' +
+        (selectedStatus === 'cancelled'
+          ? 'bg-rose-400 text-white'
+          : 'bg-slate-700 text-gray-300 hover:bg-slate-600')
+      "
+      (click)="changeStatus('cancelled')"
+    >
+      Cancelled
+    </button>
+  </div>
+
+  <!-- Chart container -->
+  <div class="bg-slate-900 rounded-lg p-4">
+    @if (isDataLoaded) {
+    <div class="relative h-80 md:h-96">
+      <canvas
+        baseChart
+        class="block"
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [type]="barChartType"
+        [plugins]="barChartPlugins"
+        (chartClick)="chartClicked($event)"
+        (chartHover)="chartHovered($event)"
+      >
+      </canvas>
+    </div>
+    } @else {
+    <div class="h-80 flex flex-col items-center justify-center gap-3">
+      <svg
+        class="animate-spin h-8 w-8 text-blue-500"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          class="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          stroke-width="4"
+        ></circle>
+        <path
+          class="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+        ></path>
+      </svg>
+      <p class="text-gray-400">Loading sales data...</p>
+    </div>
+    }
+
+    <!-- Data debugging (temporary) -->
+    <div
+      *ngIf="orders && orders.length === 0"
+      class="mt-4 p-3 bg-red-900/30 rounded border border-red-700"
+    >
+      <p class="text-red-400 text-sm">⚠️ No orders found in data source!</p>
+    </div>
+  </div>
+</div>

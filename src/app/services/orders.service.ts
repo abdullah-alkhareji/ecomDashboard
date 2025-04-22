@@ -26,11 +26,6 @@ export class OrdersService {
     return this._orders.value.find((order) => order.id === id);
   }
 
-  getOrderUser(id: number) {
-    const order = this.getOrder(id);
-    return this.usersService.getUser(order?.userId ?? -1);
-  }
-
   getOrderProducts(id: number) {
     return this._orders.value.find((order) => order.id === id)?.products;
   }
