@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { DataTableComponent } from '../../components/ui/data-table/data-table.component';
 import { createColumns } from './columns';
 import { UsersService } from '../../services/users.service';
 import { User, UserForm } from '../../../data/users';
 import { AsyncPipe } from '@angular/common';
-import { DatePipe } from '@angular/common';
 import { UsersTableComponent } from '../../components/users-table/users-table.component';
 import { ModalComponent } from '../../components/ui/modal/modal.component';
 import { AddUserFormComponent } from '../../components/add-user-form/add-user-form.component';
@@ -13,9 +11,7 @@ import { AddUserFormComponent } from '../../components/add-user-form/add-user-fo
   selector: 'app-users',
   standalone: true,
   imports: [
-    DataTableComponent,
     AsyncPipe,
-    DatePipe,
     UsersTableComponent,
     ModalComponent,
     AddUserFormComponent,
