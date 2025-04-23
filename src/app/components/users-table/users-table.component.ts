@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { User, UserForm } from '../../../data/users';
-import { DatePipe } from '@angular/common';
+import { DatePipe, UpperCasePipe } from '@angular/common';
 import { ModalComponent } from '../ui/modal/modal.component';
 import { UsersService } from '../../services/users.service';
 import { EditUserFormComponent } from '../edit-user-form/edit-user-form.component';
@@ -8,7 +8,7 @@ import { EditUserFormComponent } from '../edit-user-form/edit-user-form.componen
 @Component({
   selector: 'app-users-table',
   standalone: true,
-  imports: [DatePipe, ModalComponent, EditUserFormComponent],
+  imports: [DatePipe, ModalComponent, EditUserFormComponent, UpperCasePipe],
   templateUrl: './users-table.component.html',
   styleUrl: './users-table.component.css',
 })

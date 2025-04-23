@@ -26,7 +26,7 @@
             [alt]="product.name"
             class="w-10 h-10 rounded-full"
           />
-          {{ product.name }}
+          {{ product.name | uppercase }}
         </td>
         <td>
           {{
@@ -38,12 +38,12 @@
           {{ product.price | currency : "KWD" }}
         </td>
         <td>
-          {{ product.category }}
+          {{ product.category | uppercase }}
         </td>
         <td>
           {{ product.stock }}
         </td>
-        <td>{{ product.status }}</td>
+        <td>{{ product.status | uppercase }}</td>
         <td>{{ product.rating }}</td>
         <td>{{ product.createdAt | date : "dd/MM/yyyy" }}</td>
         <td>{{ product.updatedAt | date : "dd/MM/yyyy" }}</td>

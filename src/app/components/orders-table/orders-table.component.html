@@ -17,12 +17,12 @@
       @for (order of paginatedOrders; track order.id) {
       <tr>
         <td>{{ order.id }}</td>
-        <td>{{ order.userId }}</td>
+        <td>{{ order.userId | uppercase }}</td>
         <td>{{ order.totalPrice | currency : "KWD" }}</td>
-        <td>{{ order.status }}</td>
+        <td>{{ order.status | uppercase }}</td>
         <td>{{ order.orderDate | date : "dd/MM/yyyy" }}</td>
-        <td>{{ order.shippingAddress }}</td>
-        <td>{{ order.paymentMethod }}</td>
+        <td>{{ order.shippingAddress | uppercase }}</td>
+        <td>{{ order.paymentMethod | uppercase }}</td>
         <td>{{ order.trackingNumber || "N/A" }}</td>
         <td class="flex gap-2">
           <app-modal

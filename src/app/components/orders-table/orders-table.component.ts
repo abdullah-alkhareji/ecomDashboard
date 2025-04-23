@@ -2,13 +2,19 @@ import { Component, Input } from '@angular/core';
 import { ModalComponent } from '../ui/modal/modal.component';
 import { Order } from '../../../data/orders';
 import { OrdersService } from '../../services/orders.service';
-import { DatePipe, CurrencyPipe } from '@angular/common';
+import { DatePipe, CurrencyPipe, UpperCasePipe } from '@angular/common';
 import { EditOrderFormComponent } from '../edit-order-form/edit-order-form.component';
 
 @Component({
   selector: 'app-orders-table',
   standalone: true,
-  imports: [ModalComponent, DatePipe, CurrencyPipe, EditOrderFormComponent],
+  imports: [
+    ModalComponent,
+    DatePipe,
+    CurrencyPipe,
+    EditOrderFormComponent,
+    UpperCasePipe,
+  ],
   templateUrl: './orders-table.component.html',
   styleUrl: './orders-table.component.css',
 })

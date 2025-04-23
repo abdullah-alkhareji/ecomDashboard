@@ -23,22 +23,24 @@
             [alt]="user.name"
             class="w-10 h-10 rounded-full"
           />
-          {{ user.name }}
+          {{ user.name | uppercase }}
         </td>
         <td>
           {{ user.email }}
         </td>
         <td>
-          {{ user.role }}
+          {{ user.role | uppercase }}
         </td>
         <td>
-          {{ user.status }}
+          {{ user.status | uppercase }}
         </td>
         <td>
-          {{ user.createdAt | date }}
+          {{ user.createdAt | date : "dd/MM/yyyy" }}
         </td>
-        <td>{{ user.lastLogin | date }}</td>
-        <td>{{ user.isEmailVerified }}</td>
+        <td>
+          {{ user.lastLogin | date : "dd/MM/yyyy" }}
+        </td>
+        <td>{{ user.isEmailVerified ? "Yes" : "No" }}</td>
         <td class="flex gap-2">
           <app-modal
             [title]="'Edit User'"

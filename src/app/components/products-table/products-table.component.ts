@@ -2,7 +2,12 @@ import { Component, Input } from '@angular/core';
 import { ModalComponent } from '../ui/modal/modal.component';
 import { Product, ProductForm } from '../../../data/products';
 import { ProductsService } from '../../services/products.service';
-import { DatePipe, CurrencyPipe, SlicePipe } from '@angular/common';
+import {
+  DatePipe,
+  CurrencyPipe,
+  SlicePipe,
+  UpperCasePipe,
+} from '@angular/common';
 import { EditProductFormComponent } from '../edit-product-form/edit-product-form.component';
 
 @Component({
@@ -14,6 +19,7 @@ import { EditProductFormComponent } from '../edit-product-form/edit-product-form
     EditProductFormComponent,
     CurrencyPipe,
     SlicePipe,
+    UpperCasePipe,
   ],
   templateUrl: './products-table.component.html',
   styleUrl: './products-table.component.css',
